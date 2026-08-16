@@ -18,8 +18,8 @@ except ImportError:
     sys.exit(1)
 
 # ============ CONFIG ============
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"  # @BotFather se lo
-ALLOWED_USERS = []  # Empty = sabko allow, ya ["user_id1", "user_id2"]
+BOT_TOKEN = "8736196701:AAEMP3Hw8cNZ4lzHBT3NXXJEK12JoyrwplE"  # @BotFather se lo
+ALLOWED_USERS = [8477195695]  # Empty = sabko allow, ya ["user_id1", "user_id2"]
 OGGY_ATTACK_FILE = "./oggy"
 # ================================
 
