@@ -20,7 +20,7 @@ except ImportError:
 
 # ==================== CONFIG ====================
 BOT_TOKEN = "8736196701:AAEMP3Hw8cNZ4lzHBT3NXXJEK12JoyrwplE"       # @BotFather se lo
-ALLOWED_USERS = [8477195695]                      # Empty = sabko allow, ya ["123456789"]
+ALLOWED_USERS = ["8477195695"]                      # Empty = sabko allow, ya ["123456789"]
 BINARY_NAME = "oggy"                    # Uploaded binary ka naam
 BINARY_PATH = f"./{BINARY_NAME}"        # Current directory mein save
 CURRENT_DIR = os.getcwd()
